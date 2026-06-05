@@ -1,0 +1,11 @@
+Git Commands Practice
+
+git init
+git status
+git add .
+git commit -m "first commit"
+git log
+git branch
+git checkout -b feature
+git merge feature
+git push origin main
