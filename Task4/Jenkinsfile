@@ -15,11 +15,11 @@ pipeline {
             }
         }
 
-        stage('Test Docker Image') {
-            steps {
-                bat 'docker run --rm rhombix-task4:latest python -c "import flask; print(\"Flask test passed\")"'
-            }
-        }
+      stage('Test Docker Image') {
+    steps {
+        bat 'docker run --rm rhombix-task4:latest python -c "import flask; print(123)"'
+    }
+}
 
         stage('Deploy Container') {
             steps {
