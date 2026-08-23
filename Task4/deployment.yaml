@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rhombix-task4
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rhombix-task4
+  template:
+    metadata:
+      labels:
+        app: rhombix-task4
+    spec:
+      containers:
+        - name: rhombix-task4
+          image: localhost:5001/rhombix-task4:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
