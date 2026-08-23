@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Checking out source code...'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t rhombix-task4:latest Task4'
+            }
+        }
+
+        stage('Test Docker Image') {
+            steps {
+                bat 'docker run --rm rhombix-task4:latest python -c "import flask; print(\"Flask test passed\")"'
+            }
+        }
+
+        stage('Deploy Container') {
+            steps {
+                bat 'docker stop rhombix-task4 || exit 0'
+                bat 'docker rm rhombix-task4 || exit 0'
+                bat 'docker run -d -p 5000:5000 --name rhombix-task4 rhombix-task4:latest'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'CI/CD Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed. Check the console output.'
+        }
+    }
+}
